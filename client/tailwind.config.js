@@ -8,6 +8,9 @@ export default {
     fontFamily:{
       inter: ['Inter','sans-serif'],
       cinzel:['Cinzel','serif']
+    },
+    backgroundImage:{
+      'service-bg':"url('./src/assets/home/chef-service.jpg')"
     }
   },
   plugins: [

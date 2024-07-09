@@ -10,17 +10,11 @@ import img5 from "../../assets/home/slide/pure_veg.jpg";
 import img6 from "../../assets/home/slide/rolls.jpg";
 import img7 from "../../assets/home/slide/salad.jpg";
 import img8 from "../../assets/home/slide/sandwich.jpg";
+import SectionTitle from "../shared/SectionTitle";
 const Slider = () => {
   return (
     <main className="mt-16">
-      <h2 className="text-center italic font-cinzel text-[#D99904]">
-        ...From 11am to 10pm...
-      </h2>
-      <div className="divider w-1/4 mx-auto"></div>
-      <h1 className="text-center font-extrabold text-4xl font-cinzel">
-        Order Online
-      </h1>
-      <div className="divider w-1/4 mx-auto"></div>
+      <SectionTitle  subHeading={'...From 11am to 10pm...'} heading={  'Order Online' }/>
       <Swiper
         className="container mx-auto mb-16"
         slidesPerView={4}

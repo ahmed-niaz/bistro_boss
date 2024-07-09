@@ -11,7 +11,7 @@ const Navbar = () => {
           to="/"
           className={({ isActive }) =>
             isActive
-              ? "lg:text-[#EEFF25] uppercase bg-none text-sm font-bold"
+              ? "lg:text-[#D1A054] uppercase bg-none text-sm font-bold"
               : "text-sm font-bold  text-white"
           }
         >
@@ -23,7 +23,7 @@ const Navbar = () => {
           to="/contact-us"
           className={({ isActive }) =>
             isActive
-              ? " uppercase text-[#EEFF25] bg-none text-sm font-bold"
+              ? " uppercase text-[#D1A054] bg-none text-sm font-bold"
               : "text-sm font-bold text-white"
           }
         >
@@ -35,7 +35,7 @@ const Navbar = () => {
           to="/dashboard"
           className={({ isActive }) =>
             isActive
-              ? " uppercase text-[#EEFF25] bg-none text-sm font-bold"
+              ? " uppercase text-[#D1A054] bg-none text-sm font-bold"
               : "text-sm font-bold text-white"
           }
         >
@@ -47,7 +47,7 @@ const Navbar = () => {
           to="/our-menu"
           className={({ isActive }) =>
             isActive
-              ? " uppercase text-[#EEFF25] bg-none text-sm font-bold"
+              ? " uppercase text-[#D1A054] bg-none text-sm font-bold"
               : "text-sm font-bold text-white"
           }
         >
@@ -59,7 +59,7 @@ const Navbar = () => {
           to="/our-shop/salad"
           className={({ isActive }) =>
             isActive
-              ? " uppercase text-[#EEFF25] bg-none text-sm font-bold"
+              ? " uppercase text-[#D1A054] bg-none text-sm font-bold"
               : "text-sm font-bold text-white"
           }
         >
@@ -69,7 +69,7 @@ const Navbar = () => {
       <li>
         <NavLink to="/dashboard/my-cart" className={({ isActive }) =>
             isActive
-              ? " uppercase text-[#EEFF25] bg-none text-sm font-bold"
+              ? " uppercase text-[#D1A054] bg-none text-sm font-bold"
               : "text-sm font-bold text-white"
           }>
          <img className="w-[24px]" src={cartIcon} alt={cartIcon} />
@@ -79,8 +79,8 @@ const Navbar = () => {
     </>
   );
   return (
-    <main className=" fixed z-30 w-full">
-      <div className="navbar text-white container mx-auto">
+    <main className=" fixed z-30 w-full bg-[#15151580] ">
+      <div className="navbar text-white container mx-auto z-40">
         <div className="navbar-start">
           <div className="dropdown">
             <div tabIndex={0} role="button" className="btn btn-ghost lg:hidden">
@@ -129,7 +129,7 @@ const Navbar = () => {
                 to="/login"
                 className={({ isActive }) =>
                   isActive
-                    ? " uppercase text-[#EEFF25] bg-none text-sm font-bold"
+                    ? " uppercase text-[#D1A054] bg-none text-sm font-bold"
                     : "text-sm font-bold text-white"
                 }
               >
