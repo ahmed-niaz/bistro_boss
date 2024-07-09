@@ -10,7 +10,8 @@ export default {
       cinzel:['Cinzel','serif']
     },
     backgroundImage:{
-      'service-bg':"url('./src/assets/home/chef-service.jpg')"
+      'service-bg':"url('./src/assets/home/chef-service.jpg')",
+      'featured':"url('./src/assets/home/featured.jpg')"
     }
   },
   plugins: [
