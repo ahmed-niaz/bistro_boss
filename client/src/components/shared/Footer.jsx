@@ -10,7 +10,12 @@ const Footer = () => {
         <footer className=" bg-[#15151571] text-white p-10">
        <div className="footer">
        <aside>
-          <p>Bistro Boss</p>
+       <Link>
+            <div className="flex flex-col font-cinzel">
+              <p className="text-3xl font-extrabold">Bistro Boss</p>
+              <small className="text-2xl font-bold tracking-wide">Restaurant</small>
+            </div>
+          </Link>
             <Link className="flex items-center gap-3">
             <MdOutlineEmail /> <span>info@bistroboss.com</span>
 
@@ -33,7 +38,7 @@ const Footer = () => {
         <Link>Blog</Link>
         </nav>
         <nav>
-          <h6 className="footer-title text-white">Our Menu</h6>
+          <h6 className="footer-title text-white">Food Category</h6>
           <Link>Dessert</Link>
           <Link>Pizza</Link>
           <Link>Pasta</Link>

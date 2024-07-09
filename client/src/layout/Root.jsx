@@ -4,7 +4,7 @@ import Navbar from "../components/shared/Navbar";
 const Root = () => {
   return (
     <main className="font-inter">
-        <Navbar/>
+      <Navbar />
       <Outlet />
     </main>
   );
