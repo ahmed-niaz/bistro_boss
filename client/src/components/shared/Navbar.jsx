@@ -11,7 +11,7 @@ const Navbar = () => {
           to="/"
           className={({ isActive }) =>
             isActive
-              ? "lg:text-[#D1A054] uppercase bg-none text-sm font-bold"
+              ? "lg:text-[#835D23] uppercase bg-none text-sm font-bold"
               : "text-sm font-bold  text-white"
           }
         >
@@ -23,7 +23,7 @@ const Navbar = () => {
           to="/contact-us"
           className={({ isActive }) =>
             isActive
-              ? " uppercase text-[#D1A054] bg-none text-sm font-bold"
+              ? " uppercase text-[#835D23] bg-none text-sm font-bold"
               : "text-sm font-bold text-white"
           }
         >
@@ -35,7 +35,7 @@ const Navbar = () => {
           to="/dashboard"
           className={({ isActive }) =>
             isActive
-              ? " uppercase text-[#D1A054] bg-none text-sm font-bold"
+              ? " uppercase text-[#835D23] bg-none text-sm font-bold"
               : "text-sm font-bold text-white"
           }
         >
@@ -47,7 +47,7 @@ const Navbar = () => {
           to="/our-menu"
           className={({ isActive }) =>
             isActive
-              ? " uppercase text-[#D1A054] bg-none text-sm font-bold"
+              ? " uppercase text-[#835D23] bg-none text-sm font-bold"
               : "text-sm font-bold text-white"
           }
         >
@@ -56,10 +56,10 @@ const Navbar = () => {
       </li>
       <li>
         <NavLink
-          to="/our-shop/salad"
+          to="/our-shop"
           className={({ isActive }) =>
             isActive
-              ? " uppercase text-[#D1A054] bg-none text-sm font-bold"
+              ? " uppercase text-[#835D23] bg-none text-sm font-bold"
               : "text-sm font-bold text-white"
           }
         >
@@ -69,7 +69,7 @@ const Navbar = () => {
       <li>
         <NavLink to="/dashboard/my-cart" className={({ isActive }) =>
             isActive
-              ? " uppercase text-[#D1A054] bg-none text-sm font-bold"
+              ? " uppercase text-[#835D23] bg-none text-sm font-bold"
               : "text-sm font-bold text-white"
           }>
          <img className="w-[24px]" src={cartIcon} alt={cartIcon} />
@@ -129,7 +129,7 @@ const Navbar = () => {
                 to="/login"
                 className={({ isActive }) =>
                   isActive
-                    ? " uppercase text-[#D1A054] bg-none text-sm font-bold"
+                    ? " uppercase text-[#835D23] bg-none text-sm font-bold"
                     : "text-sm font-bold text-white"
                 }
               >

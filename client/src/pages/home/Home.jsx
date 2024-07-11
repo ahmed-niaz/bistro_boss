@@ -5,11 +5,13 @@ import PopularMenu from "../../components/home/PopularMenu";
 import Service from "../../components/home/Service";
 import Slider from "../../components/home/Slider";
 import Testimonials from "../../components/home/testimonials/Testimonials";
-import Footer from "../../components/shared/Footer";
-
+import { Helmet } from "react-helmet-async";
 const Home = () => {
   return (
     <main>
+      <Helmet>
+        <title>Bistro Boss | Home</title>
+      </Helmet>
       <Banner />
       <Slider />
       <Service />
@@ -17,7 +19,6 @@ const Home = () => {
       <Features />
       <FoodBlog />
       <Testimonials />
-      <Footer />
     </main>
   );
 };
