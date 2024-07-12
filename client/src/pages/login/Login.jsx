@@ -1,18 +1,22 @@
 import left_side_bg from "../../assets/login/left_sided_bg.png";
-import { Link } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import Google from "./Google";
 import toast from "react-hot-toast";
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useState } from "react";
 import {
   loadCaptchaEnginge,
   LoadCanvasTemplate,
   validateCaptcha,
 } from "react-simple-captcha";
+import useAuth from "../../hooks/useAuth";
 
 const Login = () => {
-  const captchaRef = useRef(null);
+  const { login } = useAuth();
+  const navigate = useNavigate();
+  const location = useLocation();
   const [disabled, setDisabled] = useState(true);
 
+  const from = location.state?.from?.pathname || "/";
   // load captcha
   useEffect(() => {
     loadCaptchaEnginge(6);
@@ -29,13 +33,17 @@ const Login = () => {
       password,
       captcha,
     };
-    console.log(userData);
+    login(email, password).then((result) => {
+      console.log(result.user);
+      navigate(from, { replace: true });
+      toast.success("Login successful");
+    });
   };
 
   // validate captcha
 
-  const validation = () => {
-    const user_captcha_value = captchaRef.current.value;
+  const validation = (e) => {
+    const user_captcha_value = e.target.value;
     console.log(user_captcha_value);
     if (validateCaptcha(user_captcha_value)) {
       toast.success("Captcha Matched");
@@ -87,18 +95,12 @@ const Login = () => {
                 <LoadCanvasTemplate />
               </label>
               <input
-                ref={captchaRef}
+                onBlur={validation}
                 type="text"
                 name="captcha"
                 placeholder="Type captcha"
                 className="input input-bordered"
               />
-              <button
-                onClick={validation}
-                className="text-[#835D23] font-cinzel font-extrabold text-sm p-2 w-full "
-              >
-                validate
-              </button>
             </div>
             <div className="form-control mt-6">
               <button
