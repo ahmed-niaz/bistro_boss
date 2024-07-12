@@ -6,7 +6,7 @@ const useMenu = () => {
   useEffect(() => {
     const fetchMenu = async () => {
       try {
-        const res = await fetch("menu.json");
+        const res = await fetch(`${import.meta.env.VITE_API_URL}/menu`);
         const data = await res.json();
         setMenu(data);
         setLoading(false);

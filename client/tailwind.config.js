@@ -18,7 +18,9 @@ export default {
       rolls: "url('./src/assets/menu/rolls.jpg')",
       salad: "url('./src/assets/menu/salad-bg.jpg')",
       sandwich: "url('./src/assets/menu/sandwich.jpg')",
-      'shop_bg':"url('./src/assets/shop/shop_bg.jpg')"
+      'shop_bg':"url('./src/assets/shop/shop_bg.jpg')",
+      'login-bg':"url('./src/assets/login/backgroundImg.png')",
+      'login_left_side':"url('./src/assets/login/left_sided_bg.png')"
     },
   },
   plugins: [require("daisyui")],

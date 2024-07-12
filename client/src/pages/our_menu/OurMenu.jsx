@@ -37,96 +37,64 @@ const OurMenu = () => {
         title="Would you Like to try a dish"
         text="text-xl"
       />
-      <MenuCategory items={dessert} />
-      <div className="text-center mb-12">
-        <button className="btn glass btn-wide bg-[#835D23] rounded-none text-white hover:bg-[#835D21]">
-          Order your favourite food..
-        </button>
-      </div>
+      <MenuCategory items={dessert} category={'dessert'} />
+     
       <Cover
         bgImage="bg-cake"
         heading="Cake"
         title="Would you Like to try a dish"
         text="text-xl"
       />
-      <MenuCategory items={cake} />
-      <div className="text-center mb-12">
-        <button className="btn glass btn-wide bg-[#835D23] rounded-none text-white hover:bg-[#835D21]">
-          Order your favourite food..
-        </button>
-      </div>
+      <MenuCategory items={cake}  category={'cake'}/>
+     
       <Cover
         bgImage="bg-pure_veg"
         heading="Vegetables"
         title="Would you Like to try a dish"
         text="text-xl"
       />
-      <MenuCategory items={pure_veg} />
-      <div className="text-center mb-12">
-        <button className="btn glass btn-wide bg-[#835D23] rounded-none text-white hover:bg-[#835D21]">
-          Order your favourite food..
-        </button>
-      </div>
+      <MenuCategory items={pure_veg} category={'pure_veg'} />
+     
       <Cover
         bgImage="bg-salad"
         heading="Salad"
         title="Would you Like to try a dish"
         text="text-xl"
       />
-      <MenuCategory items={salad} />
-      <div className="text-center mb-12">
-        <button className="btn glass btn-wide bg-[#835D23] rounded-none text-white hover:bg-[#835D21]">
-          Order your favourite food..
-        </button>
-      </div>
+      <MenuCategory items={salad}  category={'salad'}/>
+      
       <Cover
         bgImage="bg-pasta"
         heading="Pasta"
         title="Would you Like to try a dish"
         text="text-xl"
       />
-      <MenuCategory items={pasta} />
-      <div className="text-center mb-12">
-        <button className="btn glass btn-wide bg-[#835D23] rounded-none text-white hover:bg-[#835D21]">
-          Order your favourite food..
-        </button>
-      </div>
+      <MenuCategory items={pasta}  category={'pasta'}/>
+    
       <Cover
         bgImage="bg-rolls"
         heading="Rolls"
         title="Would you Like to try a dish"
         text="text-xl"
       />
-      <MenuCategory items={rolls} />
-      <div className="text-center mb-12">
-        <button className="btn glass btn-wide bg-[#835D23] rounded-none text-white hover:bg-[#835D21]">
-          Order your favourite food..
-        </button>
-      </div>
+      <MenuCategory items={rolls} category={'rolls'}/>
+     
       <Cover
         bgImage="bg-sandwich"
         heading="Sandwich"
         title="Would you Like to try a dish"
         text="text-xl"
       />
-      <MenuCategory items={sandwich} />
-      <div className="text-center mb-12">
-        <button className="btn glass btn-wide bg-[#835D23] rounded-none text-white hover:bg-[#835D21]">
-          Order your favourite food..
-        </button>
-      </div>
+      <MenuCategory items={sandwich} category={'sandwich'}/>
+     
       <Cover
         bgImage="bg-noddles"
         heading="Noddles"
         title="Would you Like to try a dish"
         text="text-xl"
       />
-       <MenuCategory items={noddles} />
-        <div className="text-center mb-12">
-        <button className="btn glass btn-wide bg-[#835D23] rounded-none text-white hover:bg-[#835D21]">
-          Order your favourite food..
-        </button>
-      </div>
+       <MenuCategory items={noddles} category={'noddles'}/>
+    
     </main>
   );
 };

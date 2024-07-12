@@ -7,7 +7,7 @@ const Testimonials = () => {
   useEffect(() => {
     const fetchReviews = async () => {
       try {
-        const res = await fetch("reviews.json");
+        const res = await fetch(`${import.meta.env.VITE_API_URL}/review`);
         const data = await res.json();
         setReviews(data);
       } catch (err) {
