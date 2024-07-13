@@ -8,35 +8,73 @@ import OurShop from "../pages/our_shop/OurShop";
 import DashboardLayout from "../layout/DashboardLayout";
 import Login from "../pages/login/Login";
 import Register from "../pages/register/Register";
+import ProtectedRoutes from "./ProtectedRoutes";
+import UserHome from "../pages/dashboard/user/UserHome";
+import Reservation from "../pages/dashboard/user/Reservation";
+import PaymentHistory from "../pages/dashboard/user/PaymentHistory";
+import Booking from "../pages/dashboard/user/Booking";
+
+import Cart from "../pages/dashboard/user/Cart";
+import AddReview from "../pages/dashboard/user/AddReview";
 
 export const router = createBrowserRouter([
   {
     path: "/",
     element: <Root />,
-    errorElement:<ErrorPage/>,
+    errorElement: <ErrorPage />,
     children: [
       {
         index: true,
         element: <Home />,
       },
       {
-        path:'/contact-us',
-        element: <Contact/>
+        path: "/contact-us",
+        element: <Contact />,
       },
       {
-        path:'/our-menu',
-        element:<OurMenu/>
+        path: "/our-menu",
+        element: <OurMenu />,
       },
       {
-        path:'/our-shop/:category',
-        element:<OurShop/>
-      }
+        path: "/our-shop/:category",
+        element: <OurShop />,
+      },
     ],
   },
   { path: "/login", element: <Login /> },
-  { path: "/register", element: <Register/>},
+  { path: "/register", element: <Register /> },
   {
-    path:'/dashboard',
-    element:<DashboardLayout/>
-  }
+    path: "/dashboard",
+    element: (
+      <ProtectedRoutes>
+        <DashboardLayout />
+      </ProtectedRoutes>
+    ),
+    children: [
+      {
+        path: "my-cart",
+        element: <Cart />,
+      },
+      {
+        path: "user-home",
+        element: <UserHome />,
+      },
+      {
+        path: "add-review",
+        element: <AddReview />,
+      },
+      {
+        path: "reservation",
+        element: <Reservation />,
+      },
+      {
+        path: "my-booking",
+        element: <Booking />,
+      },
+      {
+        path: "payment-history",
+        element: <PaymentHistory />,
+      },
+    ],
+  },
 ]);
