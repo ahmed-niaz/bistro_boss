@@ -22,21 +22,37 @@ const client = new MongoClient(uri, {
 
 async function run() {
   try {
-    const menuCollection = client.db('bistro_boss').collection('menu')
-    const reviewCollection = client.db('bistro_boss').collection('reviews')
+    const menuCollection = client.db("bistro_boss").collection("menu");
+    const reviewCollection = client.db("bistro_boss").collection("reviews");
+    const cartCollection = client.db("bistro_boss").collection("carts");
 
     // get menu collection
-    app.get('/menu',async(req,res)=>{
-        const result = await menuCollection.find().toArray()
-        res.send(result)
-    })
+    app.get("/menu", async (req, res) => {
+      const result = await menuCollection.find().toArray();
+      res.send(result);
+    });
 
     // get review collection
-    app.get('/review',async(req,res)=>{
-        const result = await reviewCollection.find().toArray()
-        res.send(result)
-    })
-    
+    app.get("/review", async (req, res) => {
+      const result = await reviewCollection.find().toArray();
+      res.send(result);
+    });
+
+    // post carts collection
+    app.post("/carts", async (req, res) => {
+      const cartItem = req.body;
+      const result = await cartCollection.insertOne(cartItem);
+      res.send(result);
+    });
+
+    // find specific user
+    app.get("/carts", async (req, res) => {
+      const email = req.query.email;
+      const query = { email: email };
+      const result = await cartCollection.find(query).toArray();
+      res.send(result);
+    });
+
     console.log(
       "Pinged your deployment. You successfully connected to MongoDB!"
     );

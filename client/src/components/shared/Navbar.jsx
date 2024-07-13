@@ -2,9 +2,11 @@ import { Link, NavLink } from "react-router-dom";
 
 import cartIcon from '../../assets/icon/cart.png'
 import useAuth from "../../hooks/useAuth";
+import useCart from "../../hooks/useCart";
 
 const Navbar = () => {
   const {user,logout} = useAuth()
+  const [cart] = useCart()
   const links = (
     <>
       <li>
@@ -74,7 +76,7 @@ const Navbar = () => {
               : "text-sm  text-white"
           }>
          <img className="w-[24px]" src={cartIcon} alt={cartIcon} />
-         {/* <div className="font-extrabold">{cart.length}</div> */}
+         <div className="font-extrabold  -ml-2 -mt-4">{cart.length}</div>
         </NavLink>
       </li>
     </>
