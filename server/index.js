@@ -25,6 +25,20 @@ async function run() {
     const menuCollection = client.db("bistro_boss").collection("menu");
     const reviewCollection = client.db("bistro_boss").collection("reviews");
     const cartCollection = client.db("bistro_boss").collection("carts");
+    const userCollection = client.db("bistro_boss").collection("users");
+
+    // users api
+    app.post("/users", async (req, res) => {
+      const user = req.body;
+      const result = await userCollection.insertOne(user);
+      res.send(result);
+    });
+
+    // get users collection
+    app.get("/users", async (req, res) => {
+      const result = await userCollection.find().toArray();
+      res.send(result);
+    });
 
     // get menu collection
     app.get("/menu", async (req, res) => {
@@ -54,12 +68,33 @@ async function run() {
     });
 
     // delete cart  item
-    app.delete('/carts/:id',async(req,res)=>{
+    app.delete("/carts/:id", async (req, res) => {
       const id = req.params.id;
-      const query = {_id:new ObjectId(id)}
-      const result = await cartCollection.deleteOne(query)
-      res.send(result)
-    })
+      const query = { _id: new ObjectId(id) };
+      const result = await cartCollection.deleteOne(query);
+      res.send(result);
+    });
+
+    // delete users
+    app.delete("/users/:id", async (req, res) => {
+      const id = req.params.id;
+      const query = { _id: new ObjectId(id) };
+      const result = await userCollection.deleteOne(query);
+      res.send(result);
+    });
+
+    // update role
+    app.patch("/users/admin/:id", async (req, res) => {
+      const id = req.params.id;
+      const filter = { _id: new ObjectId(id) };
+      const updateDoc = {
+        $set: {
+          role: "admin",
+        },
+      };
+      const result = await userCollection.updateOne(filter, updateDoc);
+      res.send(result);
+    });
 
     console.log(
       "Pinged your deployment. You successfully connected to MongoDB!"

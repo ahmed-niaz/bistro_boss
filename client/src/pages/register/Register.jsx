@@ -3,10 +3,12 @@ import useAuth from "../../hooks/useAuth";
 import Google from "../login/Google";
 import left_side_bg from "../../assets/login/left_sided_bg.png";
 import toast from "react-hot-toast";
+import {axiosPublic} from '../../hooks/useAxiosPublic'
+
 
 const Register = () => {
-  const { createUser,updateUserProfile } = useAuth();
-  const navigate = useNavigate()
+  const { createUser, updateUserProfile } = useAuth();
+  const navigate = useNavigate();
   const handleRegister = (e) => {
     e.preventDefault();
     const form = e.target;
@@ -22,28 +24,28 @@ const Register = () => {
     };
     console.log(userData);
 
-    createUser(email,password).then((result) =>{
-        console.log(result.user);
-        updateUserProfile(name,imgURL).then(()=>{
-           const userInfo = {
-            name: name,
-            email: email
-           }
-        })
-        form.reset()
-        toast.success("Register successful");
-        navigate('/')
-    })
-
-  
+    createUser(email, password).then((result) => {
+      console.log(result.user);
+      updateUserProfile(name, imgURL).then(() => {
+        const userInfo = {
+          name: name,
+          email: email,
+        };
+        axiosPublic.post(`/users`, userInfo).then((res) => {
+          if (res.data.insertedId) {
+            console.log(`user profile update`);
+            form.reset();
+            toast.success("Registration Successful");
+            navigate("/");
+          }
+        });
+      });
+    });
   };
 
-  
   return (
-    <main
-      className="font-inter bg-login-bg min-h-screen flex items-center justify-center"
-    >
-       <div className="w-10/12 mx-auto shadow-2xl flex bg-login-bg flex-col lg:flex-row">
+    <main className="font-inter bg-login-bg min-h-screen flex items-center justify-center">
+      <div className="w-10/12 mx-auto shadow-2xl flex bg-login-bg flex-col lg:flex-row">
         <div className="basis-1/2 flex flex-col p-4  justify-center items-center">
           <p className="font-cinzel uppercase text-2xl font-extrabold">
             Register
@@ -99,7 +101,9 @@ const Register = () => {
             </div>
 
             <div className="form-control mt-6">
-              <button  className="btn glass bg-[#835D23] rounded-none text-white hover:bg-[#835D21] w-full">Register</button>
+              <button className="btn glass bg-[#835D23] rounded-none text-white hover:bg-[#835D21] w-full">
+                Register
+              </button>
             </div>
             <small className="text-center text-[#D99904] font-bold ">
               Already Register?

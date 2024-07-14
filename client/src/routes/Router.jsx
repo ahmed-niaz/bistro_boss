@@ -16,6 +16,11 @@ import Booking from "../pages/dashboard/user/Booking";
 
 import Cart from "../pages/dashboard/user/Cart";
 import AddReview from "../pages/dashboard/user/AddReview";
+import AddItems from "../pages/dashboard/admin/AddItems";
+import AdminHome from "../pages/dashboard/admin/AdminHome";
+import AllUsers from "../pages/dashboard/admin/AllUsers";
+import ManageBooking from "../pages/dashboard/admin/ManageBooking";
+import ManageItems from "../pages/dashboard/admin/ManageItems";
 
 export const router = createBrowserRouter([
   {
@@ -74,6 +79,26 @@ export const router = createBrowserRouter([
       {
         path: "payment-history",
         element: <PaymentHistory />,
+      },
+      {
+        path: "add-items",
+        element: <AddItems />,
+      },
+      {
+        path: "manage-items",
+        element: <ManageItems />,
+      },
+      {
+        path: "admin-home",
+        element: <AdminHome />,
+      },
+      {
+        path: "all-users",
+        element: <AllUsers />,
+      },
+      {
+        path: "manage-booking",
+        element: <ManageBooking />,
       },
     ],
   },

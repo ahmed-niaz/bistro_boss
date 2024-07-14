@@ -1,6 +1,5 @@
 import {
-  FaCalendarAlt,
-  FaCartArrowDown,
+
   FaHome,
   FaShoppingBag,
 } from "react-icons/fa";
@@ -8,12 +7,16 @@ import { Link, NavLink } from "react-router-dom";
 import {
   MdOutlineMarkEmailUnread,
   MdOutlineRestaurantMenu,
-  MdPayment,
+
 } from "react-icons/md";
-import { GoCodeReview } from "react-icons/go";
-import { TiBook } from "react-icons/ti";
+
+import useCart from "../../hooks/useCart";
+import UserNav from "./navigation/UserNav";
+import AdminNav from "./navigation/AdminNav";
 
 const Sidebar = () => {
+    
+    const isAdmin = true;
   return (
     <main className="bg-[#835D23] w-[340px] flex items-start flex-col p-8 font-cinzel">
       <Link to="/">
@@ -23,85 +26,10 @@ const Sidebar = () => {
         </div>
       </Link>
       <ul className="menu mt-12">
-        <li>
-          <NavLink
-            to="/dashboard/user-home"
-            className={({ isActive }) =>
-              isActive
-                ? " uppercase text-black bg-none text-sm font-bold"
-                : "text-sm font-bold text-white"
-            }
-          >
-            <FaHome size={28} />
-            user Home
-          </NavLink>
-        </li>
-        <li>
-          <NavLink
-            to="/dashboard/reservation"
-            className={({ isActive }) =>
-              isActive
-                ? " uppercase text-black bg-none text-sm font-bold"
-                : "text-sm font-bold text-white"
-            }
-          >
-            <FaCalendarAlt size={28} />
-            reservation
-          </NavLink>
-        </li>
-        <li>
-          <NavLink
-            to="/dashboard/payment-history"
-            className={({ isActive }) =>
-              isActive
-                ? " uppercase text-black bg-none text-sm font-bold"
-                : "text-sm font-bold text-white"
-            }
-          >
-            <MdPayment size={28} />
-            payment history
-          </NavLink>
-        </li>
-        <li>
-          <NavLink
-            to="/dashboard/my-cart"
-            className={({ isActive }) =>
-              isActive
-                ? " uppercase text-black bg-none text-sm font-bold"
-                : "text-sm font-bold text-white"
-            }
-          >
-            <FaCartArrowDown size={28} />
-            my cart
-          </NavLink>
-        </li>
-        <li>
-          <NavLink
-            to="/dashboard/add-review"
-            className={({ isActive }) =>
-              isActive
-                ? " uppercase text-black bg-none text-sm font-bold"
-                : "text-sm font-bold text-white"
-            }
-          >
-            <GoCodeReview size={28} />
-            add review
-          </NavLink>
-        </li>
-        <li>
-          <NavLink
-            to="/dashboard/my-booking"
-            className={({ isActive }) =>
-              isActive
-                ? " uppercase text-black bg-none text-sm font-bold"
-                : "text-sm font-bold text-white"
-            }
-          >
-            <TiBook size={28} />
-            my booking
-          </NavLink>
-        </li>
+        {/* <UserNav/> */}
+        <AdminNav/>
         <div className="border-b-4 my-10"></div>
+        {/* universal navLink */}
         <li>
           <NavLink
             to="/"
