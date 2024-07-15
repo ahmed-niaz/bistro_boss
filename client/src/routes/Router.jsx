@@ -21,6 +21,7 @@ import AdminHome from "../pages/dashboard/admin/AdminHome";
 import AllUsers from "../pages/dashboard/admin/AllUsers";
 import ManageBooking from "../pages/dashboard/admin/ManageBooking";
 import ManageItems from "../pages/dashboard/admin/ManageItems";
+import AdminRoutes from "./AdminRoutes";
 
 export const router = createBrowserRouter([
   {
@@ -86,19 +87,35 @@ export const router = createBrowserRouter([
       },
       {
         path: "manage-items",
-        element: <ManageItems />,
+        element: (
+          <AdminRoutes>
+            <ManageItems />
+          </AdminRoutes>
+        ),
       },
       {
         path: "admin-home",
-        element: <AdminHome />,
+        element: (
+          <AdminRoutes>
+            <AdminHome />
+          </AdminRoutes>
+        ),
       },
       {
         path: "all-users",
-        element: <AllUsers />,
+        element: (
+          <AdminRoutes>
+            <AllUsers />
+          </AdminRoutes>
+        ),
       },
       {
         path: "manage-booking",
-        element: <ManageBooking />,
+        element: (
+          <AdminRoutes>
+            <ManageBooking />
+          </AdminRoutes>
+        ),
       },
     ],
   },

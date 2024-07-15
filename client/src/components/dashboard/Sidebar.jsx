@@ -1,22 +1,16 @@
-import {
-
-  FaHome,
-  FaShoppingBag,
-} from "react-icons/fa";
+import { FaHome, FaShoppingBag } from "react-icons/fa";
 import { Link, NavLink } from "react-router-dom";
 import {
   MdOutlineMarkEmailUnread,
   MdOutlineRestaurantMenu,
-
 } from "react-icons/md";
 
-import useCart from "../../hooks/useCart";
 import UserNav from "./navigation/UserNav";
 import AdminNav from "./navigation/AdminNav";
+import useAdmin from "../../hooks/useAdmin";
 
 const Sidebar = () => {
-    
-    const isAdmin = true;
+  const [isAdmin] = useAdmin();
   return (
     <main className="bg-[#835D23] w-[340px] flex items-start flex-col p-8 font-cinzel">
       <Link to="/">
@@ -26,8 +20,8 @@ const Sidebar = () => {
         </div>
       </Link>
       <ul className="menu mt-12">
-        {/* <UserNav/> */}
-        <AdminNav/>
+        {isAdmin ? <AdminNav /> : <UserNav />}
+
         <div className="border-b-4 my-10"></div>
         {/* universal navLink */}
         <li>

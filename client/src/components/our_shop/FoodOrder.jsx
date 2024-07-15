@@ -20,7 +20,6 @@ const FoodOrder = () => {
   const [menu] = useMenu();
   const index = categories.indexOf(category);
   const [tabIndex, setTabIndex] = useState(index);
-  console.log(category);
   const cake = menu.filter((item) => item.category === "cake");
   const dessert = menu.filter((item) => item.category === "dessert");
   const noddles = menu.filter((item) => item.category === "noddles");

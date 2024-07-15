@@ -1,10 +1,13 @@
 import { useQuery } from "@tanstack/react-query";
 import { MdDeleteOutline, MdOutlineManageAccounts } from "react-icons/md";
 import { Link } from "react-router-dom";
-import { axiosSecure } from "../../hooks/useAxiosSecure";
+
 import toast from "react-hot-toast";
+import useAxiosSecure from './../../hooks/useAxiosSecure';
+
 
 const UserTable = () => {
+ const axiosSecure = useAxiosSecure();
   const { data: users = [], refetch } = useQuery({
     queryKey: ["user"],
     queryFn: async () => {
