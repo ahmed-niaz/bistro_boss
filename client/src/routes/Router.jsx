@@ -22,6 +22,7 @@ import AllUsers from "../pages/dashboard/admin/AllUsers";
 import ManageBooking from "../pages/dashboard/admin/ManageBooking";
 import ManageItems from "../pages/dashboard/admin/ManageItems";
 import AdminRoutes from "./AdminRoutes";
+import UpdateItems from "../components/dashboard/update_items/UpdateItems";
 
 export const router = createBrowserRouter([
   {
@@ -83,9 +84,11 @@ export const router = createBrowserRouter([
       },
       {
         path: "add-items",
-        element: <AdminRoutes>
-          <AddItems />
-        </AdminRoutes>,
+        element: (
+          <AdminRoutes>
+            <AddItems />
+          </AdminRoutes>
+        ),
       },
       {
         path: "manage-items",
@@ -118,6 +121,15 @@ export const router = createBrowserRouter([
             <ManageBooking />
           </AdminRoutes>
         ),
+      },
+      {
+        path: "updateItem/:id",
+        element: (
+          <AdminRoutes>
+            <UpdateItems />
+          </AdminRoutes>
+        ),
+        loader: ({params}) => fetch(`${import.meta.env.VITE_API_URL}/menu/${params.id}`)
       },
     ],
   },

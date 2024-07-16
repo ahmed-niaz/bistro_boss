@@ -102,6 +102,14 @@ async function run() {
       res.send(result);
     });
 
+    // get specific id 
+    app.get('/menu/:id',async(req,res)=>{
+      const id = req.params.id;
+      const query = {_id: new ObjectId(id)}
+      const result = await menuCollection.findOne(query)
+      res.send(result)
+    })
+
     // get review collection
     app.get("/review", async (req, res) => {
       const result = await reviewCollection.find().toArray();
@@ -171,6 +179,26 @@ async function run() {
         res.send(result);
       }
     );
+
+
+    // update menu
+    app.patch('/menu/:id',async(req,res)=>{
+      const item = req.body; 
+      const id = req.params.id;
+      const filter = { _id: new ObjectId(id) };
+      const updateDoc = {
+        $set: {
+          name: item.name,
+          category: item.category,
+          recipe: item.recipe,
+          price: item.price,
+          image: item.image
+        }
+      }
+
+      const result = await menuCollection.updateOne(filter, updateDoc);
+      res.send(result);
+    })
 
     console.log(
       "Pinged your deployment. You successfully connected to MongoDB!"

@@ -36,10 +36,7 @@ const ItemsTable = () => {
       }
     });
   };
-// update item
-  const handleUpdate = (item) => {
-    console.log(item);
-  };
+
 
   return (
     <div className="w-full mx-4 p-6 mb-24">
@@ -74,7 +71,7 @@ const ItemsTable = () => {
                 <td>{item.price}</td>
                 <td>
                   <Link
-                    onClick={() => handleUpdate(item._id)}
+                    to = {`/dashboard/updateItem/${item._id}`}
                     className="btn glass bg-[#835D23] text-white hover:text-black"
                   >
                     <FaRegEdit size={24} />
