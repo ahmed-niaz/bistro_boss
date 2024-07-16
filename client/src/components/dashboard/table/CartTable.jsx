@@ -1,8 +1,9 @@
 import { MdDeleteOutline } from "react-icons/md";
 import { Link } from "react-router-dom";
-import useCart from "../../hooks/useCart";
-import { axiosSecure } from "../../hooks/useAxiosSecure";
+import useCart from "../../../hooks/useCart";
+
 import toast from "react-hot-toast";
+import { axiosSecure } from "../../../hooks/useAxiosSecure";
 
 const CartTable = () => {
   const [cart, refetch] = useCart();

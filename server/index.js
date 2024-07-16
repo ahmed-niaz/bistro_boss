@@ -38,7 +38,7 @@ async function run() {
 
     // verify token
     const verifyToken = (req, res, next) => {
-      console.log("Inside Verify Token", req.headers.authorization);
+      // console.log("Inside Verify Token", req.headers.authorization);
       if (!req.headers.authorization) {
         return res.status(401).send({ message: "unauthorized access" });
       }
@@ -74,7 +74,7 @@ async function run() {
     });
 
     // get users collection
-    app.get("/users", verifyToken,verifyAdmin, async (req, res) => {
+    app.get("/users", verifyToken, verifyAdmin, async (req, res) => {
       const result = await userCollection.find().toArray();
       res.send(result);
     });
@@ -115,6 +115,13 @@ async function run() {
       res.send(result);
     });
 
+    // post menu collection
+    app.post("/menu", verifyToken, verifyAdmin, async (req, res) => {
+      const item = req.body;
+      const result = await menuCollection.insertOne(item);
+      res.send(result);
+    });
+
     // find specific user
     app.get("/carts", async (req, res) => {
       const email = req.query.email;
@@ -132,25 +139,38 @@ async function run() {
     });
 
     // delete users
-    app.delete("/users/:id",verifyToken,verifyAdmin, async (req, res) => {
+    app.delete("/users/:id", verifyToken, verifyAdmin, async (req, res) => {
       const id = req.params.id;
       const query = { _id: new ObjectId(id) };
       const result = await userCollection.deleteOne(query);
       res.send(result);
     });
 
-    // update role
-    app.patch("/users/admin/:id",verifyToken,verifyAdmin, async (req, res) => {
+    // delete item
+    app.delete('/menu/:id',verifyToken, verifyAdmin,async(req,res)=>{
       const id = req.params.id;
-      const filter = { _id: new ObjectId(id) };
-      const updateDoc = {
-        $set: {
-          role: "admin",
-        },
-      };
-      const result = await userCollection.updateOne(filter, updateDoc);
-      res.send(result);
-    });
+      const query = {_id: new ObjectId(id)}
+      const result = await menuCollection.deleteOne(query)
+      res.send(result)
+    })
+
+    // update role
+    app.patch(
+      "/users/admin/:id",
+      verifyToken,
+      verifyAdmin,
+      async (req, res) => {
+        const id = req.params.id;
+        const filter = { _id: new ObjectId(id) };
+        const updateDoc = {
+          $set: {
+            role: "admin",
+          },
+        };
+        const result = await userCollection.updateOne(filter, updateDoc);
+        res.send(result);
+      }
+    );
 
     console.log(
       "Pinged your deployment. You successfully connected to MongoDB!"

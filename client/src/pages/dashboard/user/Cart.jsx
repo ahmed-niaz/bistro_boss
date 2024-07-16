@@ -1,4 +1,5 @@
-import CartTable from "../../../components/dashboard/CartTable";
+
+import CartTable from "../../../components/dashboard/table/CartTable";
 import SectionTitle from "../../../components/shared/SectionTitle";
 
 const Cart = () => {

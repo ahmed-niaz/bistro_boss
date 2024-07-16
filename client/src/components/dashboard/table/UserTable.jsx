@@ -3,7 +3,8 @@ import { MdDeleteOutline, MdOutlineManageAccounts } from "react-icons/md";
 import { Link } from "react-router-dom";
 
 import toast from "react-hot-toast";
-import useAxiosSecure from './../../hooks/useAxiosSecure';
+import useAxiosSecure from "../../../hooks/useAxiosSecure";
+
 
 
 const UserTable = () => {

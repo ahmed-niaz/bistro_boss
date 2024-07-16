@@ -1,4 +1,5 @@
-import UserTable from "../../../components/dashboard/UserTable";
+
+import UserTable from "../../../components/dashboard/table/UserTable";
 import SectionTitle from "../../../components/shared/SectionTitle";
 
 const AllUsers = () => {

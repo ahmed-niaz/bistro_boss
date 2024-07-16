@@ -19,13 +19,13 @@ const PopularMenu = () => {
   // }, []);
   // console.log(menu);
   const [menu] = useMenu()
-  const popularItems = menu.filter(item => item.category === 'popular')
+  const popularItems = menu.filter((item) => item.category === 'popular')
   return (
     <main className="my-12">
       <SectionTitle subHeading={"...Check it out"} heading={"Our Menu"} />
       <div className="grid grid-cols-2 gap-4 container mx-auto my-12">
         {popularItems.map((item) => (
-          <MenuItem key={item.id} item={item} />
+          <MenuItem key={item._id} item={item} />
         ))}
       </div>
       <div className="flex items-center justify-center">

@@ -1,7 +1,15 @@
+import ItemsTable from "../../../components/dashboard/table/ItemsTable";
+import SectionTitle from "../../../components/shared/SectionTitle";
+
 const ManageItems = () => {
   return (
     <main>
-      <h2>Manage Items</h2>
+     <div className="mt-12">
+      <SectionTitle subHeading={"...Hurry Up..."} heading="Manage all Items" />
+      </div>
+      <div className="w-10/12 mx-auto">
+        <ItemsTable/>
+      </div>
     </main>
   );
 };
