@@ -4,6 +4,7 @@ const cors = require("cors");
 require("dotenv").config();
 const { MongoClient, ServerApiVersion, ObjectId } = require("mongodb");
 const jwt = require("jsonwebtoken");
+const stripe = require("stripe")(process.env.stripe_sk);
 const port = process.env.PORT || 3000;
 
 // middleware
@@ -27,6 +28,7 @@ async function run() {
     const reviewCollection = client.db("bistro_boss").collection("reviews");
     const cartCollection = client.db("bistro_boss").collection("carts");
     const userCollection = client.db("bistro_boss").collection("users");
+    const paymentCollection = client.db("bistro_boss").collection("payments");
 
     // jwt api
     app.post("/jwt", async (req, res) => {
@@ -102,17 +104,27 @@ async function run() {
       res.send(result);
     });
 
-    // get specific id 
-    app.get('/menu/:id',async(req,res)=>{
+    // get specific id
+    app.get("/menu/:id", async (req, res) => {
       const id = req.params.id;
-      const query = {_id: new ObjectId(id)}
-      const result = await menuCollection.findOne(query)
-      res.send(result)
-    })
+      const query = { _id: new ObjectId(id) };
+      const result = await menuCollection.findOne(query);
+      res.send(result);
+    });
 
     // get review collection
     app.get("/review", async (req, res) => {
       const result = await reviewCollection.find().toArray();
+      res.send(result);
+    });
+
+    // get payments
+    app.get("/payment/:email",verifyToken, async (req, res) => {
+      const query = { email: req.params.email };
+      if (req.params.email !== req.decoded.email) {
+        return res.status(403).send({ message: "forbidden access" });
+      }
+      const result = await paymentCollection.find(query).toArray();
       res.send(result);
     });
 
@@ -155,12 +167,12 @@ async function run() {
     });
 
     // delete item
-    app.delete('/menu/:id',verifyToken, verifyAdmin,async(req,res)=>{
+    app.delete("/menu/:id", verifyToken, verifyAdmin, async (req, res) => {
       const id = req.params.id;
-      const query = {_id: new ObjectId(id)}
-      const result = await menuCollection.deleteOne(query)
-      res.send(result)
-    })
+      const query = { _id: new ObjectId(id) };
+      const result = await menuCollection.deleteOne(query);
+      res.send(result);
+    });
 
     // update role
     app.patch(
@@ -180,10 +192,9 @@ async function run() {
       }
     );
 
-
     // update menu
-    app.patch('/menu/:id',async(req,res)=>{
-      const item = req.body; 
+    app.patch("/menu/:id", async (req, res) => {
+      const item = req.body;
       const id = req.params.id;
       const filter = { _id: new ObjectId(id) };
       const updateDoc = {
@@ -192,13 +203,47 @@ async function run() {
           category: item.category,
           recipe: item.recipe,
           price: item.price,
-          image: item.image
-        }
-      }
+          image: item.image,
+        },
+      };
 
       const result = await menuCollection.updateOne(filter, updateDoc);
       res.send(result);
-    })
+    });
+
+    //  stripe
+    app.post("/create-payment-intent", async (req, res) => {
+      const { price } = req.body;
+
+      const amount = parseInt(price * 100);
+
+      console.log(amount, "amount inside the intent");
+      // Create a PaymentIntent with the order amount and currency
+      const paymentIntent = await stripe.paymentIntents.create({
+        amount: amount,
+        currency: "usd",
+        payment_method_types: ["card", "link"],
+      });
+      res.send({
+        clientSecret: paymentIntent.client_secret,
+      });
+    });
+
+    // payment
+    app.post("/payment", async (req, res) => {
+      const payment = req.body;
+      const paymentResult = await paymentCollection.insertOne(payment);
+
+      // delete cart items
+      console.log("Payment Info", payment);
+      const query = {
+        _id: {
+          $in: payment.cartIds.map((id) => new ObjectId(id)),
+        },
+      };
+      const deleteResult = await cartCollection.deleteMany(query);
+      res.send({ paymentResult, deleteResult });
+    });
 
     console.log(
       "Pinged your deployment. You successfully connected to MongoDB!"

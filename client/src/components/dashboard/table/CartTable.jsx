@@ -73,9 +73,9 @@ const CartTable = () => {
               <th>Total Price: $ {totalPrice}</th>
               <th>
                 {" "}
-                <button className="btn glass bg-[#835D23] text-white hover:text-black">
+                <Link to='/dashboard/payment' disabled = {!cart.length} className="btn glass bg-[#835D23] text-white hover:text-black">
                   PAY
-                </button>
+                </Link>
               </th>
               <th></th>
             </tr>

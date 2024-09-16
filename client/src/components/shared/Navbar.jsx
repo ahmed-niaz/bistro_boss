@@ -1,12 +1,15 @@
 import { Link, NavLink } from "react-router-dom";
 
-import cartIcon from '../../assets/icon/cart.png'
+import cartIcon from "../../assets/icon/cart.png";
 import useAuth from "../../hooks/useAuth";
 import useCart from "../../hooks/useCart";
+import useAdmin from "../../hooks/useAdmin";
 
 const Navbar = () => {
-  const {user,logout} = useAuth()
-  const [cart] = useCart()
+  const { user, logout } = useAuth();
+  const [isAdmin] = useAdmin();
+  const [cart] = useCart();
+
   const links = (
     <>
       <li>
@@ -33,18 +36,35 @@ const Navbar = () => {
           contact us
         </NavLink>
       </li>
-      <li>
-        <NavLink
-          to="/dashboard"
-          className={({ isActive }) =>
-            isActive
-              ? " uppercase text-[#835D23] bg-none text-sm font-bold"
-              : "text-sm  text-white"
-          }
-        >
-          dashboard
-        </NavLink>
-      </li>
+
+      {user && isAdmin && (
+        <li>
+          <NavLink
+            to="/dashboard/admin-home"
+            className={({ isActive }) =>
+              isActive
+                ? " uppercase text-[#835D23] bg-none text-sm font-bold"
+                : "text-sm  text-white"
+            }
+          >
+            dashboard
+          </NavLink>
+        </li>
+      )}
+      {user && !isAdmin && (
+        <li>
+          <NavLink
+            to="/dashboard/user-home"
+            className={({ isActive }) =>
+              isActive
+                ? " uppercase text-[#835D23] bg-none text-sm font-bold"
+                : "text-sm  text-white"
+            }
+          >
+            dashboard
+          </NavLink>
+        </li>
+      )}
       <li>
         <NavLink
           to="/our-menu"
@@ -70,13 +90,16 @@ const Navbar = () => {
         </NavLink>
       </li>
       <li>
-        <NavLink to="/dashboard/my-cart" className={({ isActive }) =>
+        <NavLink
+          to="/dashboard/my-cart"
+          className={({ isActive }) =>
             isActive
               ? " uppercase text-[#835D23] bg-none"
               : "text-sm  text-white"
-          }>
-         <img className="w-[24px]" src={cartIcon} alt={cartIcon} />
-         <div className="font-extrabold  -ml-2 -mt-4">{cart.length}</div>
+          }
+        >
+          <img className="w-[24px]" src={cartIcon} alt={cartIcon} />
+          <div className="font-extrabold  -ml-2 -mt-4">{cart.length}</div>
         </NavLink>
       </li>
     </>
@@ -112,7 +135,9 @@ const Navbar = () => {
           <Link>
             <div className="flex flex-col font-cinzel">
               <p className="text-3xl font-extrabold">Bistro Boss</p>
-              <small className="text-2xl font-bold tracking-wide">Restaurant</small>
+              <small className="text-2xl font-bold tracking-wide">
+                Restaurant
+              </small>
             </div>
           </Link>
         </div>
@@ -126,7 +151,7 @@ const Navbar = () => {
             role="button"
             className="btn btn-ghost btn-circle avatar"
           ></div>
-          
+
           {user ? (
             <div className="dropdown dropdown-end">
               <label tabIndex={0} className="btn btn-ghost btn-circle avatar">
@@ -169,7 +194,6 @@ const Navbar = () => {
               </NavLink>
             </div>
           )}
-         
         </div>
       </div>
     </main>
