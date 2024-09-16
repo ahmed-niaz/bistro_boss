@@ -119,7 +119,7 @@ async function run() {
     });
 
     // get payments
-    app.get("/payment/:email",verifyToken, async (req, res) => {
+    app.get("/payment/:email", verifyToken, async (req, res) => {
       const query = { email: req.params.email };
       if (req.params.email !== req.decoded.email) {
         return res.status(403).send({ message: "forbidden access" });
@@ -128,6 +128,82 @@ async function run() {
       res.send(result);
     });
 
+    // statistics
+    app.get("/admin-stats", verifyToken, verifyAdmin, async (req, res) => {
+      const users = await userCollection.estimatedDocumentCount();
+      const menuItems = await menuCollection.estimatedDocumentCount();
+      const orders = await paymentCollection.estimatedDocumentCount();
+
+      const result = await paymentCollection
+        .aggregate([
+          {
+            $group: {
+              _id: null,
+              totalRevenue: {
+                $sum: "$price",
+              },
+            },
+          },
+        ])
+        .toArray();
+
+      const revenue = result.length > 0 ? result[0].totalRevenue : 0;
+      res.send({
+        users,
+        menuItems,
+        orders,
+        revenue,
+      });
+    });
+
+    // aggregate pipeline
+    app.get("/order-stats", verifyToken, verifyAdmin, async (req, res) => {
+      const result = await paymentCollection
+        .aggregate([
+          {
+            $unwind: "$menuItemIds",
+          },
+          {
+            $addFields: {
+              menuItemIds: { $toObjectId: "$menuItemIds" },
+            },
+          },
+          {
+            $lookup: {
+              from: "menu",
+              localField: "menuItemIds",
+              foreignField: "_id",
+              as: "items",
+            },
+          },
+          {
+            $unwind: "$items",
+          },
+          {
+            $group: {
+              _id: "$items.category",
+              quantity: {
+                $sum: 1,
+              },
+              revenue: {
+                $sum: "$items.price",
+              },
+            },
+          },
+          {
+            $project: {
+              _id: 0,
+              category: "$_id",
+              quantity: "$quantity",
+              revenue: "$revenue",
+            },
+          },
+        ])
+        .toArray();
+      res.send(result);
+    });
+
+    // POST
     // post carts collection
     app.post("/carts", async (req, res) => {
       const cartItem = req.body;
