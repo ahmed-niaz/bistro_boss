@@ -1,4 +1,5 @@
 import { useQuery } from "@tanstack/react-query";
+import PropTypes from "prop-types";
 import useAuth from "../../../hooks/useAuth";
 import { axiosSecure } from "./../../../hooks/useAxiosSecure";
 import wallet from "../../../assets/stats/wallet.svg";
@@ -14,8 +15,6 @@ import {
   CartesianGrid,
   PieChart,
   Pie,
-  Sector,
-  ResponsiveContainer,
   Legend,
 } from "recharts";
 
@@ -63,6 +62,14 @@ const AdminHome = () => {
     const { fill, x, y, width, height } = props;
 
     return <path d={getPath(x, y, width, height)} stroke="none" fill={fill} />;
+  };
+
+  TriangleBar.propTypes = {
+    fill: PropTypes.string.isRequired,
+    x: PropTypes.number.isRequired,
+    y: PropTypes.number.isRequired,
+    width: PropTypes.number.isRequired,
+    height: PropTypes.number.isRequired,
   };
 
   // custom function for pie
